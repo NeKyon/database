@@ -1,0 +1,82 @@
+ - Предметная область: Список фильмов и сериалов,
+	которые мне советовали
+
+
+1 таблица: название - products
+== Хранит информацию о фильмах и сериалах, которые надо посмотреть
+== Связан с таблицами genre, type, actor_product, director_product, adviser_product 
+== 5 столбцов - id, TypeName, Name, Genre, Year
+  (TypeName - тип произведения из таблицы Type - Film и Serial - integer,
+   Name - название фильма - varchar,
+   Genre - жанр фильма - id из таблицы Genres - integer,
+   Year - год выпуска - integer)
+
+2 таблица: название - type
+== Хранит 2 значения - Film или Serial
+== Связан с таблицей products
+== 2 столбца - id, typename
+  (Type - 2 значения (строки) - Film и Serial - varchar)
+
+3 таблица: название - genres
+== Хранит информацию об основном жанре сериала/фильма
+== Связан с таблицей products
+== 2 столбца - id, Genre
+  (Genre - название жанра - varchar)
+
+4 таблица - название - directors
+== Хранит информацию о режиссерах 
+== Связан с таблицей countries, director_product
+== 7 столбцов - id, Name, Surname, Nationality, Year, Sex, alive_or_dead
+  (Name - имя режиссера - varchar,
+   Surname - фамилия режиссера - varchar,
+   Nationality - национальность, из таблицы Countries - integer,
+   Year - год рождения -  integer,
+   Sex - 2 значения: male or female - varchar,
+   alive_or_dead - 2 значения: alive or dead - varchar)
+
+5 таблица: название - director_product
+== Связывает режиссеров с фильмами
+== Связан с таблицами products, directors
+== 3 столбца - id, product_id, director_id
+  (product_id - использует id из таблицы products - integer,
+   director_id - использует id из таблицы directors - integer)
+
+6 таблица: название - countries
+== Хранит названия стран
+== Связан с таблицами actors, directors
+== 2 столбца - id, Country
+  (Country - название страны - varchar)
+
+
+7 таблица: название - actors
+== Хранит данные об актерах, снимавшихся в сериале/фильме
+== Связан с таблицами countries, actor_product
+== 7 столбцов - id, Name, Surname, Nationality, Year, Sex, alive_or_dead
+  (Name - имя актера - varchar,
+   Surname - фамилия актера - varchar,
+   Nationality - национальность - из таблицы countries - integer,
+   Year - год рождения - integer,
+   Sex - 2 значения: male or female - varchar,
+   alive_or_dead - 2 значения: alive or dead - varchar)
+
+
+8 таблица: название - actor_product
+== Связывает актеров с фильмами/сериалами, где они снимались
+== Связана с таблицами actors, products
+== 3 столбца - id, actor_id, product_id
+  (actor_id - актеры из таблицы actors - integer,
+   product_id - фильм/сериал из таблицы products - integer)
+
+9 таблица: название - advisers
+== Хранит информацию о советчиках
+== Связана с таблицей adviser_product
+== 3 столбца - id, Name, Surname
+  (Name - имя - varchar,
+   Surname - фамилия - varchar)
+
+10 таблица: название - adviser_product
+== Связывает людей, посоветовавших фильм/сериал, с самим фильмом/сериалом
+== Связана с таблицами advisers, products
+== 3 столбца - id, product_id, adviser_id
+  (product_id - из таблицы Products - integer,
+   adviser_id - из таблицы Advisers - integer)
