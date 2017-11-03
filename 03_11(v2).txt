@@ -1,0 +1,81 @@
+ - Things that were advised to me
+
+
+1 table: name - products
+== Keeps information about films and serials I need to watch
+== Has connections with: genre, type, actor_product, director_product, adviser_product 
+== 5 columns - id, TypeName, Name, Genre, Year
+  (TypeName - from the table "type" - Film и Serial - integer,
+   Name - film's name - varchar,
+   Genre - film's genre - id из таблицы Genres - integer,
+   Year - release year - integer)
+
+2 table: name - type
+== Has 2 values - Film or Serial
+== Has connections with: products
+== 2 columns - id, typename
+  (Type - keeps 2 values: Film and Serial - varchar)
+
+3 table: name - genres
+== Keeps information about main genre (film/serial)
+== Has connections with: products
+== 2 columns - id, Genre
+  (Genre - list of genres - varchar)
+
+4 table: name - directors
+== Keeps information about directors
+== Has connections with: countries, director_product
+== 7 columns - id, Name, Surname, Nationality, Year, Sex, alive_or_dead
+  (Name - director's name - varchar,
+   Surname - director's surname - varchar,
+   Nationality - from table countries - integer,
+   Year - when was born -  integer,
+   Sex - 2 values: male or female - varchar,
+   alive_or_dead - 2 values: alive or dead - varchar)
+
+5 table: name - director_product
+== Links directors and films/serials
+== Has connections with: products, directors
+== 3 columns - id, product_id, director_id
+  (product_id - uses id from table products - integer,
+   director_id - uses id from table directors - integer)
+
+6 table: name - countries
+== Keeps names of countries
+== Has connections with: actors, directors
+== 2 column - id, Country
+  (Country - varchar)
+
+
+7 table: name - actors
+== Keeps information about starring actors
+== Has connections with: countries, actor_product
+== 7 columns - id, Name, Surname, Nationality, Year, Sex, alive_or_dead
+  (Name - actor's name - varchar,
+   Surname - actor's surname - varchar,
+   Nationality - from table countries - integer,
+   Year - when was born - integer,
+   Sex - 2 values: male or female - varchar,
+   alive_or_dead - 2 values: alive or dead - varchar)
+
+
+8 table: name - actor_product
+== Links actors and films/serials
+== Has connections with: actors, products
+== 3 column - id, actor_id, product_id
+  (actor_id - uses id from table actors - integer,
+   product_id - uses id from table products - integer)
+
+9 table: name - advisers
+== Keeps information about people, who advised all that things
+== Has connections with: adviser_product
+== 3 columns - id, Name, Surname
+  (Name -  varchar,
+   Surname - varchar)
+
+10 table: name - adviser_product
+== Links advisers and products they advised
+== Has connections with: advisers, products
+== 3 columns - id, product_id, adviser_id
+  (product_id - uses id from table products - integer,
+   adviser_id - uses id from table advisers - integer)
