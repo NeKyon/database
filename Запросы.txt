@@ -1,0 +1,36 @@
+ПРОСТЫЕ ЗАПРОСЫ
+
+SELECT a.name, a.surname, a.year FROM actors AS a WHERE a.year > 1970
+AND a.sex = 'male' ORDER BY a.year DESC NULLS LAST;
+//вывести актеров мужского пола, чей год рождения ранее 1970го года, 
+//в порядке от самого младшего до старшего
+
+SELECT d.name, d.surname FROM directors AS d WHERE d.alive_or_dead = 'alive'
+ORDER BY d.surname, d.name;
+//вывести режиссеров в алфавитном порядке (по фамилиям), кто еще жив
+
+SELECT p.name, p.year FROM products AS p WHERE p.year > 2005 AND 
+p.typename = 1 ORDER BY p.year DESC NULLS LAST;
+//вывести фильмы, чей год выпуска был позже 2005 года
+
+SELECT a.name, a.surname, a.year FROM actors AS a WHERE a.sex = 'female'
+ORDER BY a.surname, a.name;
+//вывести актеров женского пола в алфавитном порядке
+
+
+
+СРЕДНИЕ ЗАПРОСЫ
+
+SELECT actors.name || ' ' || actors.surname AS FullName FROM actors 
+INNER JOIN countries ON actors.nationality=countries.id WHERE 
+countries.country = 'USA';
+//вывести всех американских актеров
+
+SELECT products.name, products.year FROM products INNER JOIN genres ON 
+products.genre=genres.id WHERE genres.genre = 'Comedy' ORDER BY products.name;
+//вывести комедийные фильмы\сериалы
+
+SELECT products.name, products.year FROM products INNER JOIN type ON 
+products.typename=type.id WHERE type.typename = 'Serial' ORDER BY products.year
+DESC NULLS LAST;
+//вывести сериалы по убыванию года выпуска 
