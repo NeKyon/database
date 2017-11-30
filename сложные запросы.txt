@@ -1,0 +1,28 @@
+
+
+//////////////////////
+SELECT name || ' ' || surname AS "Full Name" FROM (
+SELECT actors.name, actors.surname, count (*) AS "times" FROM actor_product JOIN actors ON actors.id = actor_product.actor_id
+JOIN products ON products.id = actor_product.product_id
+GROUP BY actors.name, actors.surname ) AS actor WHERE times > 1;
+//////////////////////
+показывает актеров, которые больше одного раза участвуют в фильмах в таблице
+
+
+/////////////////////////
+SELECT products.name, products.year, actors.name || ' ' || actors.surname AS
+"Full Name" FROM products JOIN genres ON products.genre = genres.id JOIN
+actor_product ON actor_product.product_id = products.id JOIN actors ON
+actors.id = actor_product.actor_id WHERE (genres.genre = 'Comedy' AND
+products.year > 2000);
+/////////////////////////
+выбрать фильмы/сериалы и актеров, где жанр произведения - комедия, а год 
+выпуска ранее 2000
+
+
+//////////
+SELECT genres.genre, name FROM genres JOIN products ON products.genre = genres.id
+WHERE genres.genre = (SELECT genre FROM (SELECT genres.genre, count(*) FROM
+genres RIGHT JOIN products ON genres.id = products.genre GROUP BY genres.genre) AS 
+new WHERE count > 4);
+///////// узнать какой жанр повторялся больше 4 раз и вывести фильмы с этим жанром
